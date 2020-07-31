@@ -1,0 +1,30 @@
+{
+  "name": "learning-websockets",
+  "version": "1.0.0",
+  "description": "Chat app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irensaywhen/learning-websockets.git"
+  },
+  "author": "Itina Gataullina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/irensaywhen/learning-websockets/issues"
+  },
+  "homepage": "https://github.com/irensaywhen/learning-websockets#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.12",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-nodemon": "^2.5.0",
+    "gulp-sass": "^4.1.0"
+  }
+}
