@@ -4,14 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HTML5 WebSickets</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,800;1,300;1,400;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/5794ad2a68.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
-    <h1>HTML5 WebSockets chat</h1>
-    <div id="chat"></div>
-    <input type="text" id="text-view" />
-    <input type="button" id="send-button" value="Send!" />
-    <br />
-    <label id="status-label">Status</label>
+    <header class="header">
+      <h1 class="title">Hey, glad to see you here!</h1>
+      <h2 class="subtitle">
+        This chat made with <i class="fas fa-heart"></i> and let you to get some
+        information about the latest music releases.
+      </h2>
+      <p class="description">
+        Just write the name of the artist you want to know about, and you'll get
+        some interesting information :)
+      </p>
+      <a href="#main" class="btn btn-info btn-small">Get started</a>
+    </header>
+    <main class="main" id="main">
+      <div id="chat" class="chat"></div>
+      <input type="text" id="text-view" />
+      <button type="button" id="send-button" class="send-button">
+        <i class="fas fa-reply"></i>
+      </button>
+      <br />
+      <label id="status-label">Status</label>
+      <div class="my-info">
+        <h3 class="title">Let me know what you think about it!</h3>
+        <figure class="image">
+          <img src="img/myphoto.jpg" alt="" />
+          <figcaption class="image-caption">
+            You can find me:
+            <div class="social">
+              <a href="#"><i class="fab fa-twitter-square"></i></a>
+              <a href="#"><i class="fab fa-facebook-square"></i></a>
+              <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </main>
+    <footer class="footer">Copyright <time id="time">2020</time></footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <!--<script src="js/main.js"></script>-->
   </body>

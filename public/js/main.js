@@ -68,9 +68,6 @@ socket.on("message", function (data) {
   let p = document.createElement("p");
   p.classList.add("message");
   p.textContent = data;
-  console.log(p);
-  console.log(data);
-
   chat.append(p);
 });
 

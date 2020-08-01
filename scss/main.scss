@@ -1,0 +1,160 @@
+@import "mixins";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: $secondary-color;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn {
+  @include fluid-type($screen-xs, $screen-xl, 16px, 18px);
+  @include easeOut;
+  display: inline-block;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  border-radius: 2px;
+
+  &.btn-block {
+    width: 100%;
+  }
+
+  &.btn-small {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  &.btn-info {
+    background: $info-color;
+    color: $primary-color;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background: lighten($info-color, 15);
+    }
+  }
+}
+
+.main {
+  max-width: 900px;
+  padding: 10px 15px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.header {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .title {
+    @include fluid-type($screen-xs, $screen-xl, 28px, 32px);
+    font-weight: 500;
+    font-style: italic;
+    padding: 15px 0;
+  }
+
+  .subtitle {
+    font-weight: 400;
+    font-style: italic;
+    padding: 10px 0;
+
+    .fa-heart {
+      color: $info-color;
+    }
+  }
+
+  .description {
+    max-width: 400px;
+    margin: 0 auto 30px;
+  }
+}
+
+.chat {
+  width: 95%;
+  height: 300px;
+  margin: 10px auto;
+  border: 1px solid darken($primary-color, 3);
+  background: lighten($primary-color, 1);
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px $primary-color, -1px -1px 10px $primary-color;
+}
+
+.my-info {
+  .title {
+    @include fluid-type($screen-xs, $screen-xl, 18px, 22px);
+    font-weight: 500;
+  }
+
+  .subtitle {
+    @include fluid-type($screen-xs, $screen-xl, 18px, 20px);
+    font-weight: 500;
+  }
+  .image {
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 2px solid $primary-color;
+    }
+
+    .image-caption {
+      @include fluid-type($screen-xs, $screen-xl, 14px, 16px);
+      font-weight: 500;
+      width: 210px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .social {
+      @include fluid-type($screen-xs, $screen-xl, 30px, 32px);
+      display: inline-block;
+
+      a {
+        @include easeOut;
+        display: inline-block;
+        color: $info-color;
+        padding-left: 5px;
+
+        &:hover {
+          color: lighten($info-color, 15);
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+  border: 1px solid darken($primary-color, 3);
+  background: lighten($primary-color, 1);
+  padding: 20px 0;
+  box-shadow: 1px 1px 10px $primary-color, -1px -1px 10px $primary-color;
+}

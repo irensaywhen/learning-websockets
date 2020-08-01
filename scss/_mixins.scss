@@ -1,0 +1,50 @@
+/* Variables */
+
+$primary-color: #f4f4f9;
+$secondary-color: #0a1128;
+$light-secondary-color: #001f54;
+$info-color: #034078;
+$light-info-color: #1282a2;
+
+/*breakpoints*/
+
+$screen-xs: 320px;
+$screen-sm: 576px;
+$screen-md: 768px;
+$screen-lg: 992px;
+$screen-xl: 1200px;
+
+/* Functions */
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+/* Mixins */
+@mixin easeOut {
+  transition: all 0.5s ease-out;
+}
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      font-size: $min-font-size;
+      @media screen and (min-width: $min-vw) {
+        font-size: calc(
+          #{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} *
+            ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+        );
+      }
+
+      @media screen and (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
+  }
+}
+
+/* Media queries */
