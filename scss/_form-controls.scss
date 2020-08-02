@@ -1,0 +1,65 @@
+/*--- Controls styles ---*/
+
+.btn {
+  @include fluid-type($screen-xs, $screen-xl, 16px, 18px);
+  @include easeOut;
+  display: inline-block;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  border-radius: 2px;
+
+  &.btn-block {
+    width: 100%;
+  }
+
+  &.btn-small {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  &.btn-info {
+    background: $info-color;
+    color: $primary-color;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background: lighten($info-color, 15);
+    }
+  }
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 15px 10px;
+  border: 1px solid darken($primary-color, 5);
+  background: lighten($primary-color, 1);
+  border-radius: 5px;
+  border-top-left-radius: unset;
+  border-top-right-radius: unset;
+  box-shadow: 1px 1px 10px $primary-color, -1px -1px 10px $primary-color;
+  color: $secondary-color;
+  font-size: 16px;
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: darken($primary-color, 20);
+    font-size: 16px;
+    font-style: italic;
+  }
+}
+
+.control-group {
+  position: relative;
+
+  .btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}

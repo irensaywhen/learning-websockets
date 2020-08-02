@@ -1,0 +1,15 @@
+/*--- Default styles ---*/
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  color: $secondary-color;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+  background: $primary-color;
+  overflow-x: hidden;
+}

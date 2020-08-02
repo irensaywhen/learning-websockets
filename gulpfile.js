@@ -39,6 +39,7 @@ function reload(done) {
 function watch() {
   gulp.watch("scss/**/*.scss", styles);
   gulp.watch("./public/*.html").on("change", gulp.series(reload));
+  gulp.watch("./public/**/*.js").on("change", gulp.series(reload));
 }
 
 exports.develop = gulp.series(styles, serve, watch);

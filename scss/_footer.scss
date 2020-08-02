@@ -1,0 +1,9 @@
+.footer {
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+  border: 1px solid darken($primary-color, 3);
+  background: lighten($primary-color, 1);
+  padding: 20px 0;
+  box-shadow: 1px 1px 10px $primary-color, -1px -1px 10px $primary-color;
+}

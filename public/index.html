@@ -15,6 +15,7 @@
     ></script>
   </head>
   <body>
+    <!--Header start-->
     <header class="header">
       <h1 class="title">Hey, glad to see you here!</h1>
       <h2 class="subtitle">
@@ -27,14 +28,58 @@
       </p>
       <a href="#main" class="btn btn-info btn-small">Get started</a>
     </header>
+    <!--Header end-->
+
+    <!--Main content start-->
     <main class="main" id="main">
-      <div id="chat" class="chat"></div>
-      <input type="text" id="text-view" />
-      <button type="button" id="send-button" class="send-button">
-        <i class="fas fa-reply"></i>
-      </button>
-      <br />
-      <label id="status-label">Status</label>
+      <!--Choosing nickname start-->
+      <section class="nickname">
+        <form class="form" id="nicknameForm">
+          <label for="nickname" class="nickname-label"
+            >Please, enter your nickname</label
+          >
+          <input
+            type="text"
+            id="nickname"
+            name="nickname"
+            class="form-control"
+            placeholder="Nickname"
+            minlength="4"
+            required
+          />
+          <div class="custom-checkbox">
+            <input type="checkbox" id="remember" name="remember" />
+            <label for="remember">Remember my nickname</label>
+          </div>
+          <button type="submit" class="btn btn-info btn-block">
+            Start chatting
+          </button>
+        </form>
+      </section>
+      <!--Choosing nickname end-->
+
+      <!-- Chat start-->
+      <section class="chat-section">
+        <div id="chat" class="chat"></div>
+        <div class="control-group">
+          <input
+            type="text"
+            id="text-view"
+            class="form-control"
+            placeholder="Start typing..."
+          />
+          <button
+            type="button"
+            id="send-button"
+            class="btn btn-info send-button"
+          >
+            <i class="fas fa-reply"></i>
+          </button>
+        </div>
+      </section>
+      <!-- Chat end-->
+
+      <!--My information start-->
       <div class="my-info">
         <h3 class="title">Let me know what you think about it!</h3>
         <figure class="image">
@@ -49,9 +94,14 @@
           </figcaption>
         </figure>
       </div>
+      <!--My information end-->
     </main>
+    <!--Main content end-->
+
+    <!--Footer start-->
     <footer class="footer">Copyright <time id="time">2020</time></footer>
+    <!--Footer end-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <!--<script src="js/main.js"></script>-->
+    <script src="js/main.js"></script>
   </body>
 </html>

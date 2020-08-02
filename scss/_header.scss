@@ -1,0 +1,29 @@
+.header {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .title {
+    @include fluid-type($screen-xs, $screen-xl, 28px, 32px);
+    font-weight: 500;
+    font-style: italic;
+    padding: 15px 0;
+  }
+
+  .subtitle {
+    font-weight: 400;
+    font-style: italic;
+    padding: 10px 0;
+
+    .fa-heart {
+      color: $info-color;
+    }
+  }
+
+  .description {
+    max-width: 400px;
+    margin: 0 auto 30px;
+  }
+}

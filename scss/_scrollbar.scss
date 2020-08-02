@@ -1,0 +1,77 @@
+/*-- Scrollbar styles --*/
+body {
+  scrollbar-width: 10px;
+  scrollbar-color: darken($primary-color, 5) $primary-color;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: $primary-color;
+  box-shadow: inset 1px 1px 5px darken($primary-color, 10);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: darken($primary-color, 5);
+  border: darken($primary-color, 10);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+button,
+input {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+button {
+  border: unset;
+  background: unset;
+  cursor: pointer;
+
+  &:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+}
