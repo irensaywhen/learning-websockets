@@ -176,9 +176,6 @@ const nicknameModule = (function (formId) {
     removeError(field);
   }
 
-  // Private saving nickname function
-  function saveNickname(nickname) {}
-
   return {
     // Public initiation method
     init: function () {

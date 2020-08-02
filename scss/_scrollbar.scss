@@ -4,16 +4,16 @@ body {
   scrollbar-color: darken($primary-color, 5) $primary-color;
 }
 
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 10px;
 }
 
-body::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: $primary-color;
   box-shadow: inset 1px 1px 5px darken($primary-color, 10);
 }
 
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: darken($primary-color, 5);
   border: darken($primary-color, 10);
 }

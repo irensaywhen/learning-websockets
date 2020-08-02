@@ -34,10 +34,12 @@
     <main class="main" id="main">
       <!--Choosing nickname start-->
       <section class="nickname">
+        <h2 class="title">
+          <label for="nickname">
+            Almost there! Please, enter the desired nickname to continue.
+          </label>
+        </h2>
         <form class="form" id="nicknameForm">
-          <label for="nickname" class="nickname-label"
-            >Please, enter your nickname</label
-          >
           <input
             type="text"
             id="nickname"
@@ -60,7 +62,47 @@
 
       <!-- Chat start-->
       <section class="chat-section">
-        <div id="chat" class="chat"></div>
+        <h2 class="title">
+          And... here it is!
+        </h2>
+        <div id="chat" class="chat">
+          <div class="server-message message">
+            <h3 class="name">
+              Server
+            </h3>
+            <p class="text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
+              quibusdam maiores nam amet, impedit voluptate commodi assumenda
+              id? Distinctio, provident. Sequi velit sed asperiores quasi quia,
+              non iure saepe. Saepe.
+            </p>
+            <time class="time">13:55</time>
+          </div>
+          <div class="user-message message">
+            <h3 class="name">
+              Other user
+            </h3>
+            <p class="text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
+              quibusdam maiores nam amet, impedit voluptate commodi assumenda
+              id? Distinctio, provident. Sequi velit sed asperiores quasi quia,
+              non iure saepe. Saepe.
+            </p>
+            <time class="time">13:55</time>
+          </div>
+          <div class="my-message message">
+            <h3 class="name">
+              My message
+            </h3>
+            <p class="text">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
+              quibusdam maiores nam amet, impedit voluptate commodi assumenda
+              id? Distinctio, provident. Sequi velit sed asperiores quasi quia,
+              non iure saepe. Saepe.
+            </p>
+            <time class="time">13:55</time>
+          </div>
+        </div>
         <div class="control-group">
           <input
             type="text"

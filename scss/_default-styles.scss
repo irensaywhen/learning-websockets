@@ -13,3 +13,10 @@ body {
   background: $primary-color;
   overflow-x: hidden;
 }
+
+h2.title {
+  @include fluid-type($screen-xs, $screen-xl, 22px, 26px);
+  text-align: center;
+  font-weight: 500;
+  padding-bottom: 25px;
+}

@@ -16,18 +16,17 @@
 .nickname {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: left;
 
   .form {
     width: 95%;
     max-width: 300px;
-    margin: 50% auto;
 
-    .nickname-label {
-      font-size: 18px;
-      display: inline-block;
-      padding-bottom: 10px;
+    .form-control {
+      border-radius: unset;
     }
 
     .custom-checkbox {
@@ -36,6 +35,15 @@
 
     .btn {
       margin: 15px auto;
+    }
+
+    .error {
+      border-color: $warning-color;
+    }
+
+    .error-message {
+      padding-top: 5px;
+      color: $warning-color;
     }
   }
 }
@@ -48,7 +56,9 @@
 
   .chat {
     height: 80vh;
+    overflow-y: scroll;
     margin: 10px auto 0;
+    padding: 10px 5px;
     border: 1px solid darken($primary-color, 3);
     border-bottom: none;
     background: lighten($primary-color, 1);
@@ -56,6 +66,77 @@
     border-bottom-left-radius: unset;
     border-bottom-right-radius: unset;
     box-shadow: 1px 1px 10px $primary-color, -1px -1px 10px $primary-color;
+
+    .message {
+      margin: 20px auto;
+
+      .text {
+        padding: 5px 7px;
+      }
+
+      .time {
+        font-size: 14px;
+        display: block;
+        width: 100%;
+        text-align: right;
+        padding-right: 5px;
+      }
+
+      /* Server message style */
+      &.server-message {
+        .name {
+          color: $info-color;
+        }
+
+        .text {
+          font-style: italic;
+        }
+      }
+
+      /* My message style */
+      &.my-message {
+        max-width: $message-max-width;
+        width: 100%;
+        margin-right: 10px;
+        padding: 10px 15px;
+        border: 1px solid lighten($light-info-color, 50);
+        border-radius: 5px;
+        background: lighten($light-info-color, 60);
+
+        .name {
+          text-align: left;
+          font-weight: 600;
+          font-size: 18px;
+          padding: 5px 7px;
+        }
+
+        .text {
+          text-align: left;
+        }
+      }
+
+      /* Other user message */
+      &.user-message {
+        max-width: $message-max-width;
+        width: 100%;
+        margin-left: 10px;
+        padding: 10px 15px;
+        border: 1px solid darken($primary-color, 5);
+        border-radius: 5px;
+        background: darken($primary-color, 1);
+
+        .name {
+          text-align: left;
+          font-weight: 600;
+          font-size: 18px;
+          padding: 5px 7px;
+        }
+
+        .text {
+          text-align: left;
+        }
+      }
+    }
   }
 }
 
