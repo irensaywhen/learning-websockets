@@ -130,6 +130,10 @@ const chatModule = (function () {
     text.classList.add("text");
     text.textContent = messageText;
 
+    let time = document.createElement("time");
+    time.classList.add("time");
+    time.textContent = moment().format("HH:mm");
+
     if (isMyMessage) {
       name.textContent = localStorage.nickname || "Unknown user";
 
@@ -140,6 +144,7 @@ const chatModule = (function () {
 
     message.append(name);
     message.append(text);
+    message.append(time);
 
     chat.append(message);
   }

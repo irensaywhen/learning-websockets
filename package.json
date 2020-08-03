@@ -4,7 +4,8 @@
   "description": "Chat app",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index.js"
+    "start": "node ./index.js",
+    "dev": "supervisor ./index.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-nodemon": "^2.5.0",
-    "gulp-sass": "^4.1.0"
+    "gulp-sass": "^4.1.0",
+    "supervisor": "^0.12.0"
   }
 }

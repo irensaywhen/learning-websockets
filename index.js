@@ -4,7 +4,7 @@ const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const path = require("path");
 const messages = require("./messages");
-const albumRequestModule = require("/albumRequestModule");
+const albumRequestModule = require("./modules/albumRequest");
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
