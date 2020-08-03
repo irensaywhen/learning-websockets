@@ -24,6 +24,10 @@ function copyImages() {
   return gulp.src(["./src/img/*"]).pipe(gulp.dest("./public/img"));
 }
 
+function scripts() {
+  return gulp.src("./src/js/**/*.js").pipe(gulp.dest("./public/js"));
+}
+
 // Initialize server
 function serve(done) {
   browserSync.init(
@@ -44,13 +48,13 @@ function reload(done) {
 }
 
 function watch() {
-  gulp.watch("scss/**/*.scss", styles);
+  gulp.watch("./scss/**/*.scss", styles);
   gulp.watch("./src/*.html").on("change", gulp.series(copyHTML, reload));
-  gulp.watch("src/js/**/*.js", gulp.series(reload));
+  gulp.watch("./src/js/**/*.js").on("change", gulp.series(scripts, reload));
 }
 
 exports.develop = gulp.series(
-  gulp.parallel(styles, copyHTML, copyImages),
+  gulp.parallel(styles, scripts, copyHTML, copyImages),
   serve,
   watch
 );
