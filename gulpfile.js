@@ -1,12 +1,11 @@
 const gulp = require("gulp");
 const sass = require("gulp-sass");
-const nodemon = require("gulp-nodemon");
 const autoprefixer = require("gulp-autoprefixer");
 const browserSync = require("browser-sync").create();
 
 function styles() {
   return gulp
-    .src("scss/**/*.scss")
+    .src("src/scss/**/*.scss")
     .pipe(sass({ outputStyle: "compressed" }).on("error", sass.logError))
     .pipe(
       autoprefixer({
@@ -15,6 +14,14 @@ function styles() {
     )
     .pipe(gulp.dest("./public/css"))
     .pipe(browserSync.stream());
+}
+
+function copyHTML() {
+  return gulp.src("src/**/*.html").pipe(gulp.dest("./public"));
+}
+
+function copyImages() {
+  return gulp.src(["./src/img/*"]).pipe(gulp.dest("./public/img"));
 }
 
 // Initialize server
@@ -38,8 +45,12 @@ function reload(done) {
 
 function watch() {
   gulp.watch("scss/**/*.scss", styles);
-  gulp.watch("./public/*.html").on("change", gulp.series(reload));
-  gulp.watch("./public/**/*.js").on("change", gulp.series(reload));
+  gulp.watch("./src/*.html").on("change", gulp.series(copyHTML, reload));
+  gulp.watch("src/js/**/*.js", gulp.series(reload));
 }
 
-exports.develop = gulp.series(styles, serve, watch);
+exports.develop = gulp.series(
+  gulp.parallel(styles, copyHTML, copyImages),
+  serve,
+  watch
+);

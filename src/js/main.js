@@ -48,6 +48,8 @@
 //  }
 //};
 
+//const e = require("express");
+
 //const label = document.getElementById("status-label");
 //const textView = document.getElementById("text-view");
 //const buttonSend = document.getElementById("send-button");
@@ -87,6 +89,85 @@
 //    }
 //  }
 //})(ids)
+
+const chatModule = (function () {
+  // Private socket variable
+  const socket = io();
+
+  // Private form variable
+  const form = document.getElementById("message-form");
+
+  // Private chat variable
+  const chat = document.getElementById("chat");
+
+  // Private button variable
+  const sendButton = document.getElementById("send-button");
+
+  // Private message input variable
+  const messageInput = document.getElementById("message-input");
+
+  // Private socket initiation function
+  function initSocket() {
+    socket.on("connect", function (event) {
+      socket.send("Hello, server!");
+    });
+
+    socket.on("message", function (messageText) {
+      isMyMessage = false;
+      displayMessage(messageText);
+    });
+  }
+
+  // Private function to display messages
+  function displayMessage(messageText, isMyMessage) {
+    let message = document.createElement("div");
+    message.classList.add("message");
+
+    let name = document.createElement("h3");
+    name.classList.add("name");
+
+    let text = document.createElement("p");
+    text.classList.add("text");
+    text.textContent = messageText;
+
+    if (isMyMessage) {
+      name.textContent = localStorage.nickname || "Unknown user";
+
+      message.classList.add("my-message");
+    } else {
+      message.classList.add("user-message");
+    }
+
+    message.append(name);
+    message.append(text);
+
+    chat.append(message);
+  }
+
+  // Private chat initiation function
+  function initChat() {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      let messageText = messageInput.value;
+      if (!messageText) return;
+
+      let isMyMessage = true;
+
+      displayMessage(messageText, isMyMessage);
+      socket.send(messageText);
+
+      //socket.emit("album request", "Hello");
+    });
+  }
+  return {
+    init: function init() {
+      initSocket();
+
+      initChat();
+    },
+  };
+})();
 
 const nicknameModule = (function (formId) {
   // Private variable containing form
@@ -237,3 +318,4 @@ const nicknameModule = (function (formId) {
 })("nicknameForm");
 
 nicknameModule.init();
+chatModule.init();

@@ -4,6 +4,7 @@ const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const path = require("path");
 const messages = require("./messages");
+const albumRequestModule = require("/albumRequestModule");
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
@@ -21,6 +22,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("message", (data) => {
+    socket.broadcast.emit("message", data);
+  });
+
+  socket.on("album request", (data) => {
     console.log(data);
   });
 });
