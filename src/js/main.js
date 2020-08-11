@@ -90,104 +90,38 @@
 //  }
 //})(ids)
 
-// Abstraction for Observer and Subject
-
-// List of dependent Observers a subject may have
-function ObserverList() {
-  this.observerList = [];
-}
-
-// Add new object
-ObserverList.prototype.add = function (obj) {
-  return this.observerList.push(obj);
-};
-
-// Amount of observers
-ObserverList.prototype.count = function (obj) {
-  return this.observerList.length;
-};
-
-// Get observer by index
-ObserverList.prototype.get = function (index) {
-  if (index > -1 && index < this.observerList.length) {
-    return this.observerList[index];
-  }
-};
-
-// Find the first occurance of the observer in the list of observers
-ObserverList.prototype.indexOf = function (obj, startIndex) {
-  let i = startIndex;
-  while (i < this.observerList.length) {
-    if (this.observerList[i] === obj) {
-      return i;
-    }
-    i++;
-  }
-  return -1;
-};
-
-// Remove observer at the current position
-ObserverList.prototype.removeAt = function (index) {
-  this.observerList.splice(index, 1);
-};
-
-/**
- * Abstraction for Subject
- */
-function Subject() {
-  this.observers = new ObserverList();
-}
-
-// Add new observer
-Subject.prototype.addObserver = function (observer) {
-  this.observers.add(observer);
-};
-
-// Remove observer by finding its position and splicing
-Subject.prototype.removeObserver = function (observer) {
-  this.observers.removeAt(this.observers.indexOf(observer, 0));
-};
-
-// Notify all the observers
-Subject.prototype.notify = function (context) {
-  let observerCount = this.observers.count();
-  for (let i = 0; i < observerCount; i++) {
-    this.observers.get(i).update(context);
-  }
-};
-
-/**
- * Abstraction for Observer
- */
-function Observer() {
-  this.update = function () {
-    // ...
-  };
-}
-
-// Extend an object with an extension
-function extend(obj, extension) {
-  for (let key in extension) {
-    obj[key] = extension[key];
-  }
-}
-
 const socket = (function () {
   // Private socket variable
   const socket = io();
 
+  function sendMessage() {
+    // Send message to the server
+  }
+
   return {
     init: function () {
-      alert("Initiating!");
-
-      extend(this, new Observer());
-
       socket.on("connect", function (event) {
-        socket.send("Hello, server!");
+        //socket.send("Hello, server!");
       });
 
-      socket.on("message", function (messageText) {
-        isMyMessage = false;
+      socket.on("message", function (messageData) {
+        // Message Data is recieved as object
+        messageData.isMyMessage = false;
+
+        let messageRecievedEvent = new CustomEvent("socket:messageRecieved", {
+          detail: messageData,
+        });
+
+        document.dispatchEvent(messageRecievedEvent);
+      });
+
+      document.addEventListener("chat:messageSent", function (event) {
+        let detail = event.detail;
+
+        detail.nickname =
+          sessionStorage.nicknme || localStorage.nickname || "Unknown user";
+        // Send message to the server
+        socket.send(detail);
       });
     },
   };
@@ -200,33 +134,38 @@ const chat = (function () {
   // Private chat variable
   const chat = document.getElementById("chat");
 
-  // Private button variable
-  const sendButton = document.getElementById("send-button");
-
   // Private message input variable
   const messageInput = document.getElementById("message-input");
 
-  // Private function to display messages
-  function displayMessage(messageText, isMyMessage) {
-    let message = document.createElement("div");
+  // Private function displaying messages
+  function displayMessage({
+    messageText,
+    isMyMessage,
+    isServerMessage,
+    nickname,
+  }) {
+    let message = document.createElement("div"),
+      name = document.createElement("h3"),
+      text = document.createElement("p"),
+      time = document.createElement("time");
+
     message.classList.add("message");
-
-    let name = document.createElement("h3");
     name.classList.add("name");
-
-    let text = document.createElement("p");
     text.classList.add("text");
-    text.textContent = messageText;
-
-    let time = document.createElement("time");
     time.classList.add("time");
+
+    text.textContent = messageText;
     time.textContent = moment().format("HH:mm");
 
     if (isMyMessage) {
       name.textContent = localStorage.nickname || "Unknown user";
-
       message.classList.add("my-message");
+    } else if (isServerMessage) {
+      message.classList.add("server-message");
+      name.textContent = "Server";
     } else {
+      name.textContent = nickname;
+
       message.classList.add("user-message");
     }
 
@@ -237,31 +176,34 @@ const chat = (function () {
     chat.append(message);
   }
 
-  // Private chat initiation function
-  function initChat() {
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      let messageText = messageInput.value;
-      if (!messageText) return;
-
-      let isMyMessage = true;
-
-      displayMessage(messageText, isMyMessage);
-      //socket.send(messageText);
-      // Instead, you'll notify socket about changing in state
-
-      //socket.emit("album request", "Hello");
-    });
-  }
   return {
     init: function init() {
-      //initSocket();
+      // Event listener to submit messages
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-      initChat();
+        let messageText = messageInput.value;
+        if (!messageText) return;
 
-      // Make Chat Concrete Subject
-      extend(chat, new Subject());
+        let isMyMessage = true;
+
+        displayMessage({ messageText, isMyMessage });
+
+        // Emit custom event telling that new message was sent
+        let messageSentEvent = new CustomEvent("chat:messageSent", {
+          bubbles: true,
+          detail: { messageText },
+        });
+
+        //let eventData = { messageText, username };
+        form.dispatchEvent(messageSentEvent);
+      });
+
+      // Event listener to recieve messages
+      document.addEventListener("socket:messageRecieved", function (event) {
+        console.log("Message recieved!");
+        displayMessage(event.detail);
+      });
     },
   };
 })();
@@ -400,7 +342,7 @@ const nickname = (function (formId) {
           }
         }
 
-        // If there are errrors, don't submit form and focus on first element with error
+        // If there are errors, don't submit form and focus on first element with error
         if (hasErrors) {
           hasErrors.focus();
           return;
@@ -418,3 +360,4 @@ const nickname = (function (formId) {
 //chat.init();
 
 socket.init();
+chat.init();

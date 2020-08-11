@@ -15,6 +15,7 @@ app.use(express.static(path.join(__dirname, "public")));
 io.on("connection", (socket) => {
   console.log("A user connected");
 
+  // Send greetings to the chat when a connection is established
   socket.send(messages.greetings);
 
   socket.on("disconnect", () => {
@@ -22,7 +23,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("message", (data) => {
-    socket.broadcast.emit("message", data);
+    //socket.broadcast.emit("message", data);
+    //socket.emit("message", data);
+    console.log(data);
+    socket.send(data);
   });
 
   socket.on("album request", (data) => {
