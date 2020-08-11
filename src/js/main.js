@@ -158,14 +158,16 @@ const chat = (function () {
     time.textContent = moment().format("HH:mm");
 
     if (isMyMessage) {
+      // Display message of the current user
       name.textContent = localStorage.nickname || "Unknown user";
       message.classList.add("my-message");
     } else if (isServerMessage) {
+      // Display server message
       message.classList.add("server-message");
       name.textContent = "Server";
     } else {
+      // Display other user's message
       name.textContent = nickname;
-
       message.classList.add("user-message");
     }
 
@@ -195,7 +197,6 @@ const chat = (function () {
           detail: { messageText },
         });
 
-        //let eventData = { messageText, username };
         form.dispatchEvent(messageSentEvent);
       });
 
